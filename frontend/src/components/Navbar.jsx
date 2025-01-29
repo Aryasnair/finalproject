@@ -7,28 +7,32 @@ const Navbar = () => {
     const [visible, setVisible] = useState(false)
     return (
         <div className='flex items-center justify-between py-5 front-medium'>
-            <img src={assets.logo1} className='w-20' alt="" />
+            <img src={assets.logo1} className='w-25' alt="" />
             <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
-                <NavLink to='/' className={'flex flex-col items-center gap-1'}>
-                    <p>HOME</p>
+                <NavLink to='/' className={'flex flex-col items-center gap-1 font-bold'}>
+                    <p style={{ fontFamily: 'Playwrite VN, serif' }}>HOME</p>
                     <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                 </NavLink>
-                <NavLink to='/collection' className={'flex flex-col items-center gap-1'}>
-                    <p>PRODOUCTS</p>
+                <NavLink to='/collection' className={'flex flex-col items-center gap-1 font-bold'}>
+                    <p style={{ fontFamily: 'Playwrite VN, serif' }}>COLLECTIONS</p>
                     <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                 </NavLink>
-                <NavLink to='/about' className={'flex flex-col items-center gap-1'}>
-                    <p>ABOUT</p>
+                <NavLink to='/about' className={'flex flex-col items-center gap-1 font-bold'}>
+                    <p style={{ fontFamily: 'Playwrite VN, serif' }}>ABOUT</p>
                     <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                 </NavLink>
-                <NavLink to='/contactus' className={'flex flex-col items-center gap-1'}>
-                    <p>CONTACTUS</p>
+                <NavLink to='/contactus' className={'flex flex-col items-center gap-1 font-bold'}>
+                    <p style={{ fontFamily: 'Playwrite VN, serif' }}>CONTACTUS</p>
+                    <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
+                </NavLink>
+                <NavLink to='/login' className={'flex flex-col items-center gap-1 font-bold'}>
+                    <p style={{ fontFamily: 'Playwrite VN, serif' }}>LOGIN</p>
                     <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                 </NavLink>
                 
             </ul>
             <div className='flex items-center gap-6'>
-                <img src={assets.searchicon} className='w-8 cursor-pointer' alt="" />
+                <img src={assets.searchicon} className='w-7 cursor-pointer' alt="" />
 
                 <div className='group relative'>
                     <img src={assets.profileicon} className='w-7 cursor-pointer' alt="" />
@@ -41,7 +45,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <Link to='/cart' className='relative'>
-                    <img src={assets.carticon} className='w-14 min-w-14' alt="" />
+                    <img src={assets.carticon} className='w-7 min-w-7' alt="" />
                     <p className='absolute right-[3px] bottom-[20px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>10</p>
                 </Link>
 
