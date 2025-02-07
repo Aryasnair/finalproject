@@ -10,6 +10,9 @@ import Login from './pages/Login'
 import Placeorder from './pages/Placeorder'
 import Orders from './pages/Orders'
 import Navbar from './components/Navbar'
+import Signup from './pages/SignUp'
+import Footer from './components/Footer'
+import SearchBar from './components/SearchBar'
 
 const App = () => {
   return (
@@ -19,13 +22,15 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path='/collection' element={<Collection/>}/>
         <Route path='/about' element={<About/>}/>
-        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/contactus' element={<Contact/>}/>
         <Route path='/prodouct/:prodouctId' element={<Prodouct/>}/>
         <Route path='/cart/' element={<Cart/>} />
         <Route path='/login' element={<Login/>}/>
+        <Route path='/signup' element={<Signup/>}/>
         <Route path='/placeorder' element={<Placeorder/>}/>
         <Route path='/orders' element={<Orders/>}/>
       </Routes>
+      <Footer/>
 
     </div>
   )

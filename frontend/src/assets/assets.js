@@ -8,14 +8,19 @@ import sidemenuicon from './sidemenuicon.png'
 import heroimage1 from './heroimage1.jpg'
 import heroimage2 from './heroimage2.jpg'
 import heroimage3 from './heroimage3.jpg'
-import clayimg0 from './clayimg0.jpg';
 import clayimg1 from './clayimg1.jpg';
-import clayimg2 from './clayimg2.jpg';
 import homedecor1 from './homedecor1.jpg'
 import clayimg4 from './clayimg4.jpg';
-import pappercraft1 from './pappercraft1.jpg';
 import pappercraft2 from './pappercraft2.jpg';
 import claydecor5 from './claydecor5.jpg';
+import loginbg from './loginbg.jpg'
+import exchange_icon from './exchange_icon.png'
+import quality_icon from './quality_icon.png';
+import customer_support from './customer_support.png'
+import dropdown_icon2 from './dropdown_icon2.png'
+import homedecor2 from './homedecor2.jpeg'
+import aboutus from './aboutus.jpeg'
+import contact from './contact.jpeg'
 
 
 
@@ -30,7 +35,14 @@ export const assets={
     sidemenuicon,
     heroimage1,
     heroimage2,
-    heroimage3
+    heroimage3,
+    loginbg,
+    exchange_icon,
+    quality_icon,
+    customer_support,
+    dropdown_icon2,
+    aboutus,
+    contact
 }
 
 
@@ -42,6 +54,7 @@ export const prodoucts=[
         price:20,
         image:[clayimg1],
         category:"Home Decor",
+        subCategory:"Clay Decors",
         date:1716634345448,
         bestseller: true
     },
@@ -52,6 +65,7 @@ export const prodoucts=[
         price:20,
         image:[homedecor1],
         category:"Home Decor",
+        subCategory:"Dream Catchers",
         date:1716634345448,
         bestseller: true 
     },
@@ -62,6 +76,7 @@ export const prodoucts=[
         price:10,
         image:[clayimg4],
         category:"Home Decor",
+        subCategory:"Clay Decors",
         date:1716634345448,
         bestseller: true 
     },
@@ -72,6 +87,7 @@ export const prodoucts=[
         price:30,
         image:[pappercraft2],
         category:"Home Decor",
+        subCategory:"Papper Craft",
         date:1716634345448,
         bestseller: true 
     },
@@ -82,7 +98,10 @@ export const prodoucts=[
         price:22,
         image:[claydecor5],
         category:"Home Decor",
+        subCategory:"Clay Decors",
         date:1716634345448,
         bestseller: true 
     }
+    
+    
 ]
