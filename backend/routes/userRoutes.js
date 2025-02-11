@@ -1,4 +1,4 @@
-const express=require('express');
+const express=require('express')
 const {loginUser,registerUser,adminLogin}=require('../controllers/userController')
 
 const userRouter=express.Router();

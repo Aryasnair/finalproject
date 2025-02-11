@@ -21,6 +21,8 @@ import dropdown_icon2 from './dropdown_icon2.png'
 import homedecor2 from './homedecor2.jpeg'
 import aboutus from './aboutus.jpeg'
 import contact from './contact.jpeg'
+import cross_icon from './cross_icon.png'
+import star_icon from './star_icon.png'
 
 
 
@@ -42,11 +44,13 @@ export const assets={
     customer_support,
     dropdown_icon2,
     aboutus,
-    contact
+    contact,
+    cross_icon,
+    star_icon
 }
 
 
-export const prodoucts=[
+export const products=[
     {
         _id:"001",
         name:"Claydecor",

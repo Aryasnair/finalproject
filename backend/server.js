@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express')
 const cors = require('cors');
 const connectDB = require('./config/mongodb.js');
 const connectCloudinary  = require('./config/cloudinary');
@@ -10,17 +10,16 @@ const app = express()
 const port = process.env.PORT || 4000
 connectDB();
 connectCloudinary();
-//Middlewares
 
+
+//Middlewares
 app.use(express.json())
 app.use(cors())
 
 //api end points
-
 app.use('/api/user',userRouter)
-
+// app.use('/api/product',productRouter)
 app.get('/',(req,res)=>{
     res.send("API Working")
 })
-
 app.listen(port,()=> console.log('server started on PORT : '+port))

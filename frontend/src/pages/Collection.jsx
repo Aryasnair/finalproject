@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
 import Tittle from '../components/Tittle';
-import ProdouctItem from '../components/ProdouctItem';
+import ProductItem from '../components/ProductItem';
 
 const Collection = () => {
-  const { prodoucts, search, showSearch } = useContext(ShopContext);
+  const { products, search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
-  const [filterProdoucts, setFilterProdoucts] = useState([]);
+  const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relevent');
@@ -29,22 +29,22 @@ const Collection = () => {
   };
 
   const applyFilter = () => {
-    let prodouctCopy = prodoucts.slice();
+    let productCopy = products.slice();
 
     if (showSearch && search) {
-      prodouctCopy = prodouctCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+      productCopy = productCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
     }
     if (category.length > 0) {
-      prodouctCopy = prodouctCopy.filter(item => category.includes(item.category));
+      productCopy = productCopy.filter(item => category.includes(item.category));
     }
     if (subCategory.length > 0) {
-      prodouctCopy = prodouctCopy.filter(item => subCategory.includes(item.subCategory));
+      productCopy = productCopy.filter(item => subCategory.includes(item.subCategory));
     }
-    setFilterProdoucts(prodouctCopy);
+    setFilterProducts(productCopy);
   };
 
-  const sortProdoucts = () => {
-    let sortedCopy = filterProdoucts.slice();
+  const sortProducts = () => {
+    let sortedCopy = filterProducts.slice();
 
     switch (sortType) {
       case 'low-high':
@@ -57,15 +57,15 @@ const Collection = () => {
         applyFilter();
         return;
     }
-    setFilterProdoucts(sortedCopy);
+    setFilterProducts(sortedCopy);
   };
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, search, showSearch, prodoucts]);
+  }, [category, subCategory, search, showSearch, products]);
 
   useEffect(() => {
-    sortProdoucts();
+    sortProducts();
   }, [sortType]);
 
   return (
@@ -111,8 +111,8 @@ const Collection = () => {
         </div>
         {/* Map Products */}
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6'>
-          {filterProdoucts.map((item, index) => (
-            <ProdouctItem key={index} name={item.name} id={item._id} price={item.price} image={item.image} />
+          {filterProducts.map((item, index) => (
+            <ProductItem key={index} name={item.name} id={item._id} price={item.price} image={item.image} />
           ))}
         </div>
       </div>

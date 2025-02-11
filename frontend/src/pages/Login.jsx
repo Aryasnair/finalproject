@@ -1,72 +1,89 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [currentState, setCurrentState] = useState("Login");
+ 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const { token, setToken, backendUrl } = useContext(ShopContext);
+  console.log("Backend URL:", backendUrl);
+  const navigate = useNavigate(); // Fix: use useNavigate separately
+
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState(""); // Fix typo
+  const [email, setEmail] = useState("");
+
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4000/login", { email, password });
-      localStorage.setItem("token", res.data.token);
-      alert("Login successful!");
-      navigate("/home"); // Redirect after login
-    } catch (err) {
-      setError("Invalid email or password");
+      if (currentState === "Sign Up") {
+        const response = await axios.post(backendUrl + "/api/user/register", {
+          name,
+          email,
+          password,
+        })
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
+         
+        } else {
+          toast.error(response.data.message);
+        }
+      } else {
+        const response = await axios.post(backendUrl + "/api/user/login", {
+          email,
+          password
+        })
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user)); // Save user data
+          navigate("/"); // Redirect after login
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message );
     }
-  };
+  }
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]); // Fix: added `navigate` in dependencies
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg">
-        <h2 className="text-2xl font-semibold text-center text-gray-700">Login</h2>
-
-        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
-
-        <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-gray-700">Email</label>
-            <input
-              type="email"
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-              placeholder="Enter your email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-              placeholder="Enter your password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            Login
-          </button>
-        </form>
-
-        <p className="text-center text-gray-600 mt-4">
-          Don't have an account?{" "}
-          <a href="/Signup" className="text-blue-500 hover:underline">
-            Sign up
-          </a>
-        </p>
+    <form
+      onSubmit={onSubmitHandler}
+      className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800">
+      <div className="inline-flex items-center gap-2 mb-2 mt-10">
+        <p className="prata-regular text-3xl">{currentState}</p>
+        <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
       </div>
-    </div>
-  );
-};
+
+      {currentState === "Login" ? '' : 
+        <input onChange={(e)=>setName(e.target.value)} value={name} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='Name' required/>
+      }
+
+<input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='Email' required/>
+        <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Password' required/>
+        <div className='w-full flex justify-between text-sm mt-[-8px]'>
+            <p className=' cursor-pointer'>Forgot your password?</p>
+            {
+              currentState === 'Login' 
+              ? <p onClick={()=>setCurrentState('Sign Up')} className=' cursor-pointer'>Create account</p>
+              : <p onClick={()=>setCurrentState('Login')} className=' cursor-pointer'>Login Here</p>
+            }
+        </div>
+        <button className='bg-black text-white font-light px-8 py-2 mt-4'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
+    </form>
+  )
+}
 
 export default Login;
